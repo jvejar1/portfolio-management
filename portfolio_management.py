@@ -22,9 +22,10 @@ class Portfolio:
         return sum(stock.value() for stock in self.stocks.values())
 
     def rebalance(self):
+        # Genera el rebalance y retorna un diccionario que para cada stock tiene una accion asociada tipo 'Buy N shares of x_stock' o 'Sell N shares of x_stock'
         total = self.total_value()
-        actions = {}
-
+        actions = {} # Almacena la informacion que va a retornar este metodo
+        #se itera sobre cada stock para poder determinar la diferencia entre el valor actual y el valor esperado y determinar si se debe vender o comprar. La cantidad a comprar o vender es la diferencia de valor dividida en el precio actual del stock.
         for symbol, stock in self.stocks.items():
             current_value = stock.value()
             target_value = total * self.target_allocation.get(symbol, 0)
